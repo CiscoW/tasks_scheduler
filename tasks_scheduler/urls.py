@@ -17,8 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from django.conf.urls import url
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_swagger_view(title='Restful API')
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^$', schema_view),
     url(r'^tasks/', include('tasks.urls')),
+
 ]

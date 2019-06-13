@@ -1,4 +1,6 @@
 from __future__ import absolute_import, unicode_literals
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import mixins
 from rest_framework import generics
 from rest_framework import status
@@ -11,6 +13,8 @@ class CRUD(mixins.RetrieveModelMixin,
            mixins.UpdateModelMixin,
            mixins.DestroyModelMixin,
            generics.GenericAPIView):
+    authentication_classes = (SessionAuthentication, BasicAuthentication)
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request, *args, **kwargs):
         if args or kwargs:
