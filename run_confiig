@@ -1,0 +1,2 @@
+celery -A tasks_scheduler worker --pool=solo -l info
+celery -A tasks_scheduler beat -l info
