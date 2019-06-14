@@ -72,6 +72,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ),
+
     # 禁用api接口页面
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
@@ -79,7 +80,7 @@ REST_FRAMEWORK = {
 
     # 分页
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 3
+    'PAGE_SIZE': 50
 }
 
 ROOT_URLCONF = 'tasks_scheduler.urls'
