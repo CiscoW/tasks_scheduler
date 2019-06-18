@@ -18,14 +18,29 @@ from django.urls import path
 from django.conf.urls import include
 from django.conf.urls import url
 from rest_framework_swagger.views import get_swagger_view
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 schema_view = get_swagger_view(title='RESTful API')
 
 urlpatterns = [
 
     path('admin/', admin.site.urls),
+
+    # 用于Swagger
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^$', schema_view),
+
+    # 支持多种登录方式
+    url(r'^rest-auth/', include('rest_auth.urls')),
+
+    # JWT
+    url(r'^api/token/$', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    url(r'^api/token/refresh/$', TokenRefreshView.as_view(), name='token_refresh'),
+
+    # 各种api接口
     url(r'^tasks/', include('tasks.urls')),
 
 ]
