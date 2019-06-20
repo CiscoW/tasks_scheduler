@@ -40,10 +40,10 @@ class UpdateUserSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         if instance.check_password(validated_data.pop('old_password')):
+            setattr(instance, 'old_password', instance.password)
             instance.set_password(validated_data.pop('new_password'))
             instance.save()
             # 返回结果会按 fields 中内容展示
-            setattr(instance, 'old_password', instance.password)
             setattr(instance, 'new_password', instance.password)
             return instance
         else:
