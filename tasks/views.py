@@ -16,64 +16,78 @@ from .serializers import IntervalScheduleSerializer
 from .serializers import SolarScheduleSerializer
 from .serializers import PeriodicTaskSerializer
 from .tasks import add
-from utils.crud import CRUD
-from utils.crud import CRUDList
+from utils import crud
 
 
 # Create your views here.
 
 
 # Clocked
-class ClockedScheduleDetail(CRUD):
+class ClockedScheduleDetail(crud.RetrieveMixin,
+                            crud.UpdateMixin,
+                            crud.DeleteMixin):
     queryset = ClockedSchedule.objects.all()
     serializer_class = ClockedScheduleSerializer
 
 
-class ClockedScheduleList(CRUDList):
+class ClockedScheduleList(crud.CreateMixin,
+                          crud.RetrieveListMixin):
     queryset = ClockedSchedule.objects.all()
     serializer_class = ClockedScheduleSerializer
 
 
 # Crontab
-class CrontabScheduleDetail(CRUD):
+class CrontabScheduleDetail(crud.RetrieveMixin,
+                            crud.UpdateMixin,
+                            crud.DeleteMixin):
     queryset = CrontabSchedule.objects.all()
     serializer_class = CrontabScheduleSerializer
 
 
-class CrontabScheduleList(CRUDList):
+class CrontabScheduleList(crud.CreateMixin,
+                          crud.RetrieveListMixin):
     queryset = CrontabSchedule.objects.all()
     serializer_class = CrontabScheduleSerializer
 
 
 # Interval
-class IntervalScheduleDetail(CRUD):
+class IntervalScheduleDetail(crud.RetrieveMixin,
+                             crud.UpdateMixin,
+                             crud.DeleteMixin):
     queryset = IntervalSchedule.objects.all()
     serializer_class = IntervalScheduleSerializer
 
 
-class IntervalScheduleList(CRUDList):
+class IntervalScheduleList(crud.CreateMixin,
+                           crud.RetrieveListMixin):
     queryset = IntervalSchedule.objects.all()
     serializer_class = IntervalScheduleSerializer
 
 
 # Solar
-class SolarScheduleDetail(CRUD):
+class SolarScheduleDetail(crud.RetrieveMixin,
+                          crud.UpdateMixin,
+                          crud.DeleteMixin):
     queryset = SolarSchedule.objects.all()
     serializer_class = SolarScheduleSerializer
 
 
-class SolarScheduleList(CRUDList):
+class SolarScheduleList(crud.CreateMixin,
+                        crud.RetrieveListMixin):
     queryset = SolarSchedule.objects.all()
     serializer_class = SolarScheduleSerializer
 
 
 # PeriodicTask
-class PeriodicTaskDetail(CRUD):
+class PeriodicTaskDetail(crud.RetrieveMixin,
+                         crud.UpdateMixin,
+                         crud.DeleteMixin):
     queryset = PeriodicTask.objects.all()
     serializer_class = PeriodicTaskSerializer
 
 
-class PeriodicTaskList(CRUDList):
+class PeriodicTaskList(crud.CreateMixin,
+                       crud.RetrieveListMixin):
     queryset = PeriodicTask.objects.all()
     serializer_class = PeriodicTaskSerializer
 

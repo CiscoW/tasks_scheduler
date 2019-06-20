@@ -4,32 +4,13 @@ from rest_framework import mixins
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.response import Response
+from .permissions import CustomObjectPermissions
 
 
-# 单个数据获取/修改/删除
-class CRUD(mixins.RetrieveModelMixin,
-           mixins.UpdateModelMixin,
-           mixins.DestroyModelMixin,
-           generics.GenericAPIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request, *args, **kwargs):
-        return self.retrieve(request, *args, **kwargs)
-
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
-
-    def delete(self, request, *args, **kwargs):
-        return self.destroy(request, *args, **kwargs)
-
-
-# 获取全部和单条、批量新增
-class CRUDList(generics.ListAPIView,
-               generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
-
-    def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
+# 新增数据Create
+class CreateMixin(mixins.CreateModelMixin,
+                  generics.GenericAPIView):
+    permission_classes = (IsAuthenticated, CustomObjectPermissions)
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
@@ -44,3 +25,46 @@ class CRUDList(generics.ListAPIView,
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+# 读取数据Retrieve
+# 单条
+class RetrieveMixin(mixins.RetrieveModelMixin,
+                    generics.GenericAPIView):
+    permission_classes = (IsAuthenticated, CustomObjectPermissions)
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+
+# 读取数据Retrieve
+# 全部
+class RetrieveListMixin(mixins.ListModelMixin,
+                        generics.GenericAPIView):
+    permission_classes = (IsAuthenticated, CustomObjectPermissions)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+
+# 更新数据 Update
+class UpdateMixin(mixins.UpdateModelMixin,
+                  generics.GenericAPIView):
+    permission_classes = (IsAuthenticated, CustomObjectPermissions)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+
+# 删除数据 Delete
+class DeleteMixin(mixins.DestroyModelMixin,
+                  generics.GenericAPIView):
+    permission_classes = (IsAuthenticated, CustomObjectPermissions)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(data=[], status=status.HTTP_200_OK)
