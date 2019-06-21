@@ -1,4 +1,4 @@
-from django.contrib.auth.models import (User, Group)
+from django.contrib.auth.models import User
 from rest_framework import serializers
 
 
@@ -30,7 +30,7 @@ class CreateUserSerializer(serializers.ModelSerializer):
         return data
 
 
-class UpdateUserSerializer(serializers.ModelSerializer):
+class UpdateUserPasswordSerializer(serializers.ModelSerializer):
     old_password = serializers.CharField(max_length=128)
     new_password = serializers.CharField(max_length=128)
 

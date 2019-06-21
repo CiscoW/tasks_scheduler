@@ -19,7 +19,7 @@ urlpatterns = [
     path(r'periodicTask/', views.PeriodicTaskList.as_view()),
 
     # celery 使用样例接口
-    path(r'index', views.Add.as_view()),
-    path(r'get_result/<str:result_id>', views.Result.as_view()),
+    path(r'index/', views.Add.as_view()),
+    path(r'get_result/<str:result_id>/', views.Result.as_view()),
 
 ]

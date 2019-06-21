@@ -1,8 +1,11 @@
 from django.contrib.auth.models import (User)
+from rest_framework.permissions import IsAuthenticated
+
 from utils import crud
+from utils.permissions import IsOneSelf
 from .serializers import UserListSerializer
 from .serializers import CreateUserSerializer
-from .serializers import UpdateUserSerializer
+from .serializers import UpdateUserPasswordSerializer
 
 
 # Create your views here.
@@ -25,6 +28,8 @@ class CreateUser(crud.CreateMixin):
     serializer_class = CreateUserSerializer
 
 
-class UpdateUser(crud.UpdateMixin):
+class UpdateUserPassword(crud.UpdateMixin):
+    lookup_field = 'username'
+    permission_classes = (IsAuthenticated, IsOneSelf)
     queryset = User.objects.all()
-    serializer_class = UpdateUserSerializer
+    serializer_class = UpdateUserPasswordSerializer

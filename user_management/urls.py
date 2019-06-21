@@ -6,6 +6,6 @@ urlpatterns = [
     path(r'user/<int:pk>/', views.UserDetail.as_view()),
     path(r'user/', views.UserList.as_view()),
     path(r'createUser/', views.CreateUser.as_view()),
-    path(r'updateUser/<int:pk>/', views.UpdateUser.as_view()),
+    path(r'updateUserPassword/<str:username>/', views.UpdateUserPassword.as_view()),
 
 ]

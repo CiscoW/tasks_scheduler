@@ -14,3 +14,9 @@ class CustomObjectPermissions(permissions.DjangoObjectPermissions):
         'PATCH': ['%(app_label)s.change_%(model_name)s'],
         'DELETE': ['%(app_label)s.delete_%(model_name)s'],
     }
+
+
+class IsOneSelf(permissions.BasePermission):
+
+    def has_object_permission(self, request, view, obj):
+        return request.user.username == obj.username or request.user.is_superuser

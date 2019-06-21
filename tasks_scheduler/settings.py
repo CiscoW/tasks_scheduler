@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
     'django_celery_beat',
     #
-    'user_management'
+    'user_management',
+    'group_management',
 
 ]
 
@@ -178,7 +179,7 @@ REST_USE_JWT = True
 
 # JWT 配置
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=5),
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(hours=12),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': False,
     'BLACKLIST_AFTER_ROTATION': True,

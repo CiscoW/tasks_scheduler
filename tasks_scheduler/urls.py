@@ -42,6 +42,8 @@ urlpatterns = [
 
     # 各种api接口
     url(r'^tasks/', include('tasks.urls')),
-    url(r'^userManagement/', include('user_management.urls'))
+    url(r'^userManagement/', include('user_management.urls')),
+    url(r'^groupManagement/', include('group_management.urls')),
+    url(r'^permissionManagement/', include('permission_management.urls')),
 
 ]
